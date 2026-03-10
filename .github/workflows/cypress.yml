@@ -13,7 +13,17 @@ jobs:
       - name: Setup Node.js
         uses: actions/setup-node@v3
         with:
-          node-version: '18'
+          node-version: '20'
+          cache: 'npm'
+          cache-dependency-path: ./cypress_ci_demo/package-lock.json
+
+      - name: Cache Cypress
+        uses: actions/cache@v3
+        with:
+          path: ~/.cache/Cypress
+          key: ${{ runner.os }}-cypress-${{ hashFiles('**/package-lock.json') }}
+          restore-keys: |
+            ${{ runner.os }}-cypress-
 
       - name: Install dependencies
         run: npm ci
