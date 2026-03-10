@@ -5,7 +5,7 @@ describe('Login Test', () => {
     cy.visit('index.html')
 
     cy.get('#username').type('admin')
-    cy.get('#password').type('1234')
+    cy.get('#password').type('12345')
 
     cy.get('#loginBtn').click()
 
