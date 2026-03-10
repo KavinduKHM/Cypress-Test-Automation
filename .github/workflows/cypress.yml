@@ -10,8 +10,13 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v3
 
+      - name: Setup Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: '18'
+
       - name: Install dependencies
-        run: npm install
+        run: npm ci
         working-directory: ./cypress_ci_demo
 
       - name: Run Cypress tests
