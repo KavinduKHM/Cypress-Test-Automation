@@ -1,0 +1,43 @@
+name: Cypress Tests  #Displays this name in the GitHub Actions tab
+
+on: [push]  #Triggers the workflow automatically when new github push started
+
+jobs:
+  cypress-run:      #Name of the job
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository   #Clones code from GitHub onto the runner
+        uses: actions/checkout@v3
+
+      - name: Setup Node.js         #Installs Node.js v20
+        uses: actions/setup-node@v3
+        with:
+          node-version: '20'
+          cache: 'npm'
+          cache-dependency-path: ./cypress_ci_demo/package-lock.json
+
+      - name: Cache Cypress        # Saves the Cypress binary so it doesn't re-download on every run
+        uses: actions/cache@v3
+        with:
+          path: ~/.cache/Cypress
+          key: ${{ runner.os }}-cypress-${{ hashFiles('**/package-lock.json') }}
+          restore-keys: |
+            ${{ runner.os }}-cypress-
+
+      - name: Install dependencies
+        run: npm ci
+        working-directory: ./cypress_ci_demo
+
+      - name: Run Cypress tests     #Executes your Cypress tests in headless mode (no browser UI)
+        run: npx cypress run
+        working-directory: ./cypress_ci_demo
+
+      - name: Notify Slack on Success
+        if: success()
+        run: echo "Tests passed ✅"
+
+      - name: Notify Slack on Failure
+        if: failure()
+        run: echo "Tests failed ❌"
+
