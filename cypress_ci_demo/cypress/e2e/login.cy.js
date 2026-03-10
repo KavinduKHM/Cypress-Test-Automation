@@ -12,3 +12,7 @@ describe('Login Test', () => {
   })
 
 })
+
+// login.cy.js
+// add a comment
+// CI test trigger
