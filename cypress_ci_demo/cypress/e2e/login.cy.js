@@ -14,7 +14,4 @@ describe('Login Test', () => {
 })
 
 // login.cy.js
-// add a comment
-// CI test trigger
-
-// CI trigger test new 
+// This comment is added to demonstrate the login test case for Cypress. The test visits the index.html page, fills in the username and password fields, and clicks the login button.
