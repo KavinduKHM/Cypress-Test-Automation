@@ -41,7 +41,5 @@ jobs:
         if: failure()
         run: echo "Tests failed ❌"
 
-      - name: Upload Cypress Videos and Screenshots
-        if: failure()
-        uses: actions/upload-artifact@v3
+      
 
