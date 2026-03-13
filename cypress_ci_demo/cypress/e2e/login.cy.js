@@ -15,3 +15,4 @@ describe('Login Test', () => {
 
 // login.cy.js
 // This comment is added to demonstrate the login test case for Cypress. The test visits the index.html page, fills in the username and password fields, and clicks the login button.
+// The test checks if the login functionality is working as expected.
